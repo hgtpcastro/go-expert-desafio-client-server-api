@@ -13,7 +13,7 @@ import (
 )
 
 func TestRegistrarCotacaoMoedaNoBancoDeDados(t *testing.T) {
-	t.Run("deve regostrar a cotação no banco de dados", func(t *testing.T) {
+	t.Run("deve registrar a cotação no banco de dados", func(t *testing.T) {
 		cotacaoMoeda := entidade.NovoCotacaoMoeda(
 			"USD-BRL",
 			"USD",
@@ -56,7 +56,7 @@ func TestRegistrarCotacaoMoedaNoBancoDeDados(t *testing.T) {
 					nome,
 					valor,
 					data 
-				from cotacao_moeda
+				from cotacao
 				where id = ?`,
 				cotacaoMoeda.Id,
 			).

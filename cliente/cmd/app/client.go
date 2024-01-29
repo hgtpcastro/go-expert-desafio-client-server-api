@@ -12,7 +12,7 @@ import (
 )
 
 type CotacaoMoeda struct {
-	Nome  string `jason: "nome"`
+	Nome  string `jason:"nome"`
 	Valor string `json:"valor"`
 }
 
@@ -42,18 +42,21 @@ func main() {
 	var cotacaoMoeda CotacaoMoeda
 	erro = json.Unmarshal(conteudo, &cotacaoMoeda)
 	if erro != nil {
-		fmt.Fprintf(os.Stderr, "Erro ao fazer parse da resposta: %v\n", erro)
+		fmt.Fprintf(os.Stderr, "erro ao fazer parse da resposta: %v\n", erro)
+		panic(erro)
 	}
 
-	file, err := os.Create("cotacao-moeda.txt")
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Erro ao criar arquivo: %v\n", err)
+	file, erro := os.Create("cotacao.txt")
+	if erro != nil {
+		fmt.Fprintf(os.Stderr, "erro ao criar arquivo: %v\n", erro)
+		panic(erro)
 	}
 	defer file.Close()
 
-	_, err = file.WriteString(fmt.Sprintf("%s: %s\n", cotacaoMoeda.Nome, cotacaoMoeda.Valor))
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Erro ao escrever no arquivo: %v\n", err)
+	_, erro = file.WriteString(fmt.Sprintf("%s: %s\n", cotacaoMoeda.Nome, cotacaoMoeda.Valor))
+	if erro != nil {
+		fmt.Fprintf(os.Stderr, "Erro ao escrever no arquivo: %v\n", erro)
+		panic(erro)
 	}
 
 	fmt.Println("Arquivo criado com sucesso!")

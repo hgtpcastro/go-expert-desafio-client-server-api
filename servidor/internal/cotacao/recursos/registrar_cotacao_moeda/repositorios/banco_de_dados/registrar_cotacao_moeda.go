@@ -22,7 +22,7 @@ func NovoRepositorioRegistrarCotacaoMoeda(bancoDados *sql.DB) *RepositorioRegist
 
 func (r *RepositorioRegistrarCotacaoMoeda) CriarTabelaCotacaoMoeda() error {
 	_, erro := r.bancoDados.Exec(`
-		CREATE TABLE IF NOT EXISTS cotacao_moeda (
+		CREATE TABLE IF NOT EXISTS cotacao (
 			id varchar(255) NOT NULL PRIMARY KEY,
 			moeda varchar(255),
 			de varchar(255),
@@ -41,7 +41,7 @@ func (r *RepositorioRegistrarCotacaoMoeda) CriarTabelaCotacaoMoeda() error {
 
 func (r *RepositorioRegistrarCotacaoMoeda) Registrar(contexto context.Context, cotacaoMoeda *entidade.CotacaoMoeda) error {
 	stmt, erro := r.bancoDados.PrepareContext(contexto,
-		` insert into cotacao_moeda(id, moeda, de, para, nome, valor, data)
+		` insert into cotacao(id, moeda, de, para, nome, valor, data)
 			values(?, ?, ?, ?, ?, ?, ?)
 		`,
 	)

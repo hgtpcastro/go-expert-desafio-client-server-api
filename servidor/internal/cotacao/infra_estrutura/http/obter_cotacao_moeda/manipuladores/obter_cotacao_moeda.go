@@ -1,7 +1,6 @@
 package manipuladores
 
 import (
-	"context"
 	"encoding/json"
 	"fmt"
 	"net/http"
@@ -36,7 +35,7 @@ func (m *ManipuladorObterCotacaoMoeda) ServeHTTP(w http.ResponseWriter, r *http.
 		m.repositorioRegistrarCotacaoMoeda,
 	)
 
-	cotacaoDto, erro := casoUsoObterCotacaoMoeda.Obter(context.Background(), moeda)
+	cotacaoDto, erro := casoUsoObterCotacaoMoeda.Obter(r.Context(), moeda)
 
 	if erro != nil {
 		w.WriteHeader(http.StatusNotFound)

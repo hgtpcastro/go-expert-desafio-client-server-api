@@ -39,7 +39,7 @@ func (s *CasoUsoObterCotacaoMoeda) ConfigurarDependencias() {
 }
 
 func (s *CasoUsoObterCotacaoMoeda) Obter(contexto context.Context, moeda string) (dtos.ObterCotacaoMoedaDto, error) {
-	obterCotacaoMoedaDto, erro := s.obterCotacaoMoeda.Obter(moeda)
+	obterCotacaoMoedaDto, erro := s.obterCotacaoMoeda.Obter(contexto, moeda)
 	if erro != nil {
 		return dtos.ObterCotacaoMoedaDto{}, erro
 	}

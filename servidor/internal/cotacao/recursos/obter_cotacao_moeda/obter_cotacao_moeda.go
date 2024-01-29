@@ -1,6 +1,9 @@
 package obtercotacaomoeda
 
 import (
+	"context"
+	"time"
+
 	"github.com/hgtpcastro/go-expert/desafio-client-server-api/servidor/internal/cotacao/dtos"
 	"github.com/hgtpcastro/go-expert/desafio-client-server-api/servidor/internal/cotacao/recursos/obter_cotacao_moeda/contratos"
 )
@@ -15,8 +18,11 @@ func NovoObterCotacaoMoeda(repositorioCotacao contratos.RepositorioCotacaoMoeda)
 	}
 }
 
-func (o *ObterCotacaoMoeda) Obter(moeda string) (dtos.ObterCotacaoMoedaDto, error) {
-	entidade, erro := o.repositorio.Obter(moeda)
+func (o *ObterCotacaoMoeda) Obter(contexto context.Context, moeda string) (dtos.ObterCotacaoMoedaDto, error) {
+	ctx, cancelarRequisicao := context.WithTimeout(context.Background(), 200*time.Millisecond)
+	defer cancelarRequisicao()
+
+	entidade, erro := o.repositorio.Obter(ctx, moeda)
 	if erro != nil {
 		return dtos.ObterCotacaoMoedaDto{}, erro
 	}

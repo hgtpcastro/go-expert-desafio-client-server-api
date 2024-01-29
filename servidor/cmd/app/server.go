@@ -16,7 +16,7 @@ import (
 func main() {
 	repositorioObterCotacaoMoeda := obter_cotacao_moeda_repositorio.NovoRepositorioObterCotacaoMoeda()
 
-	bancoDados, erro := sql.Open("sqlite3", "cotacao-moeda.sqlite")
+	bancoDados, erro := sql.Open("sqlite3", "cotacao.sqlite")
 	if erro != nil {
 		log.Fatalf("não foi possível acessar o banco de dados, %v", erro)
 		return

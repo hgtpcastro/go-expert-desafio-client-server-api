@@ -1,6 +1,7 @@
 package emmemoria
 
 import (
+	"context"
 	"strings"
 
 	"github.com/hgtpcastro/go-expert/desafio-client-server-api/servidor/internal/cotacao/entidade"
@@ -17,7 +18,7 @@ func NovoRepositorioObterCotacaoMoeda() *RepositorioObterCotacaoMoeda {
 	return r
 }
 
-func (r *RepositorioObterCotacaoMoeda) Obter(moeda string) (*entidade.CotacaoMoeda, error) {
+func (r *RepositorioObterCotacaoMoeda) Obter(contexto context.Context, moeda string) (*entidade.CotacaoMoeda, error) {
 	if strings.TrimSpace(moeda) == "" {
 		return nil, erros.ErroMoedaNaoInformada
 	}
